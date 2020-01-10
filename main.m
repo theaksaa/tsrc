@@ -1,14 +1,35 @@
 load rcnn;
 
-testImage = imread('Test/3.jpg');
+testImage = imread('Test/8.jpg');
 
-[bboxes,score,label] = detect(rcnn,testImage,'MiniBatchSize',128)
+[bboxes, score, idx] = detect(rcnn, testImage, 'MiniBatchSize', 128)
 
-[score, idx] = max(score);
-bbox = bboxes(idx, :);
-annotation = sprintf('%s: (Confidence = %0.2f%%)', label(idx), score*100);
+% figure
+% hold on;
+% imshow(testImage);
 
-outputImage = insertObjectAnnotation(testImage, 'rectangle', bbox, annotation, 'LineWidth', 3, 'TextBoxOpacity',0.9,'FontSize',18);
+annotation = [];
+bbox = [];
 
-figure
-imshow(outputImage)
+bbox = [];
+for i = 1:size(bboxes, 1)
+    if score(i,1)*100 >= 0.00
+        t = sprintf('%s (%0.2f%%)', idx(i,1), score(i,1)*100);
+        annotation{i} = t;
+        bbox = [bbox; bboxes(i,:)];
+        %text(bboxes(i,1:1), bboxes(i,2:2) - 15, t, 'Fontsize', 10, 'Color', 'b','TextBoxOpacity',0.9);
+        %rectangle('Position', bboxes(i,:), 'Edgecolor', 'r');
+    end
+end
+
+if size(annotation, 2) ~= 0
+    outputImage = insertObjectAnnotation(testImage, 'rectangle', bbox, cellstr(annotation), ...
+                                         'LineWidth', 3, 'TextBoxOpacity', 0.9,'FontSize', 18, 'Color', 'yellow');
+    imshow(outputImage);
+else
+    imshow(testImage);
+end
+
+
+%hold off;
+
