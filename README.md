@@ -14,4 +14,5 @@ Uroš Aksentijević - theaksaa
 
 ## Acknowledgments
 Mathworks website (https://www.mathworks.com/)
+
 Database of traffic signs for training neural network (http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset)
