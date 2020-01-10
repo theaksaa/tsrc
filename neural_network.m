@@ -42,7 +42,7 @@ options = trainingOptions('sgdm', ...
     'Verbose', false, ...
     'Plots', 'training-progress');
 
-net = trainNetwork(imdsTrain, layers, options, 'NegativeOverlapRange', [0 0.3]);
+net = trainNetwork(imdsTrain, layers, options);
 save net;
 
 % load net;
