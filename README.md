@@ -1,5 +1,5 @@
-# Algorithms sources codes
-This is repository of algorithms source codes written in C++
+# Traffic signs recognition and classification
+This is repository of traffic signs recognition and classification made in matlab using machine learning.
 
 ## The content of respository:
 ### Matlab scripts
